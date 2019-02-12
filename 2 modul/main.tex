@@ -1,0 +1,550 @@
+\documentclass[12pt,oneside]{article}
+\usepackage[russian]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{ textcomp }
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{geometry}
+\usepackage{amssymb, gensymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage{indentfirst}
+\usepackage{color}
+\usepackage{datetime}
+\usepackage{epigraph}
+\geometry{a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm}
+
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+\newtheorem{statement}{Утверждение}
+\theoremstyle{definition}
+\newtheorem{definition}{Определение}
+\newtheorem{exercise}{Упражнение}
+\newtheorem{axiom}{Аксиома}
+\newtheorem{exmp}{Пример}
+\newtheorem{theorem}{Теорема}
+\newtheorem{remark}{Замечание}
+\newtheorem*{corollary}{Следствие}
+\newtheorem{proposition}{Предложение}
+\newtheorem{lemma}{Лемма}[section]
+\newenvironment{ourproof}[1]{\textit{Доказательство #1.}}{\qed}
+\newenvironment{solution}[1]{\textbf{\\ Решение #1}}
+
+\newenvironment{answer}[1]{\textbf{\\ Ответ #1:}}
+
+
+\definecolor{g}{HTML}{006600}
+\definecolor{r}{HTML}{FF0000}
+\title{Дискретная математика, модуль 2 из 4}
+\author{Danił Szubin}
+\newcommand{\RomanNumeralCaps}[1]
+    {\MakeUppercase{\romannumeral #1}}
+\definecolor{linkcolor}{HTML}{799B03} % цвет ссылок
+\definecolor{urlcolor}{HTML}{799B03} % цвет гиперссылок
+ 
+\hypersetup{pdfstartview=FitH,  linkcolor=linkcolor,urlcolor=urlcolor,colorlinks=true}
+
+
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+\begin{center}
+{\bf {\large Аксиоматическая теория натуральных чисел}}\\
+Конспект главы 1 книги Э.Ландау <<Основы анализа>> с комментариями Д.Грохольского и В. Таллера
+\end{center}
+
+\section{Аксиомы}
+
+\begin{axiom}
+ $\mathbb{N}\ni 1$
+\end{axiom}
+\begin{remark}
+Т.е. наше множество не пусто; оно содержит вещь, именуемую 1 (читается: единица). Другими словами 1 есть натуральное число.
+\end{remark}
+
+\begin{axiom}
+$\forall x\in\mathbb{N} \  \exists ! \ x'\in\mathbb{N}$
+\end{axiom}
+
+\begin{remark}
+Символ $x'$ означает <<число. следующее за $x$>>.
+
+При записи последующих для чисел $x$, заданных не в виде одной буквы, мы будем, во избежание путаницы, заключать такие числа в скобки. Аналогично мы будем поступать во всей книге при записи выражений $x+y, xy, x-y,-x,x^y$  и т.п.
+\end{remark}
+
+\begin{remark}
+$(x=y)\Longrightarrow (x'=y')$
+\end{remark}
+
+\begin{axiom}
+$x'\neq 1\quad \forall x\in\mathbb{N}$
+\end{axiom}
+
+\begin{remark}
+Аксиома 3 говорит, что 1 не следует ни за каким натуральным числом. То есть 1 --- первое натуралное число.
+\end{remark} 
+
+\begin{axiom}
+$(x'=y')\Longrightarrow (x=y)$
+\end{axiom} 
+
+\begin{axiom}
+Пусть $M\subset\mathbb{N}$, и $M$ обладает следующими свойствами: 
+
+I) $1\in\ M$. 
+
+II) Если $x\in\ M$, то и $x'\in\ M$. 
+
+Тогда (утверждает аксиома 5) верно, что $M=\mathbb{N}$.
+\end{axiom}
+
+\begin{remark}
+На аксиоме 5 основан так называемый <<принцип математической ндукции>>.
+\end{remark}
+
+\section{Сложение}
+
+\begin{theorem}
+$$(x\neq y)\Rightarrow (x'\neq y')$$
+\begin{proof} 
+В противном случае мы имели бы $x'=y'$  и, следовательно, по аксиоме 4, $x=y$.
+\end{proof}
+\end{theorem}
+
+\begin{theorem}
+$$x'\neq x$$
+\begin{proof}
+Пусть $M$ множество тех $x$, для которых это утверждение справедливо. Проверим, что для множества $M$ выполнены условия I) и II) асиомы 5.
+
+I) По аксиоме 1 и аксиоме 3, $$1'\neq 1.$$ следовательно, 1 принадлежит множеству $M$.
+
+II) Если $x$ принадлежит $M$, то $x'\neq x$, следовательно, по теореме 1, $(x')'\neq x'$, значит, $x'$ также принадлежит $M$.
+
+	В силу аксиомы 5, $M$содержит тогда все натуральные числа, т.е. для каждого $x$ имеем $$x'\neq x.$$ 
+\end{proof}
+\end{theorem}
+
+\begin{theorem}
+Если $$x\neq 1,$$ то существует (и притом по аксиоме 4, только одно) $u\in\mathbb{N}$ такое, что $$x=u'.$$
+
+\begin{proof} Пусть $M$ -- множество, состоящее из 1 и тех $x$, для которых существует $u$, обладающее указанным свойством (по аксиоме 3, каждое такое $x\neq 1.$). То есть 
+$$M=\{1\}\sqcup \{x\colon \exists u\in\mathbb{N} \big| x=u'\}.$$
+
+Обоснуем комментарий в скобках, т.е. утверждение $1\notin \{x\colon \exists u\in\mathbb{N} \big| x=u'\}$. В самом деле, если $x\in \{x\colon \exists u\in\mathbb{N} \big| x=u'\}$, то $x$ является последующим для некоторого $u\in\mathbb{N}$, а 1 не является последующим ни для какого натурального числа  согласно аксиоме 3. Поэтому $1\notin \{x\colon \exists u\in\mathbb{N} \big| x=u'\}$. 
+Если нам удастся доказать, что $M\supset\mathbb{N}$, то тем самым утверждение теоремы 3 будет доказано. Для доказательства включения $M\supset\mathbb{N}$ мы будем использовать аксиому 5. Проверим выполнение условий I) и II) аксиомы 5.
+
+I) $1\in M$ по определению множества $M$.
+
+II) Из того, что $x\in M$, выведем $x'\in M$. Включение $x\in M$ означает, что либо $x=1$, либо $x$ является последующим за каким-то натуральным числом. Однако, $x'$ является последующим за $x$, поэтому $x'$ тоже удовлетворяет тому свойству, по которому натуральные числа отбираются в множество $M$, поэтому $x'\in M$. 
+
+В силу аксиомы 5, $M$ содержит тогда все натуральные числа; таким образом, $$\forall x\neq 1$$
+    существует $u$ такое, что $$x=u'.$$
+\end{proof}
+\end{theorem}
+
+\begin{remark}{Порочный круг (circulus vitious)}
+Это <<доказательство>> проведённое по схеме:
+
+\textbf{Теорема.} Верно $A$ и $B$.
+\\
+\textit{Доказательство.} Пусть верно $A$. Рассуждения. Верно $B$.
+\\
+Пусть верно $B$. Другие рассуждения. Верно $A$. \qed
+\\
+\textbf{Вопрос: } Почему плохо?
+\begin{answer}{}
+Вместо $A\wedge B$ доказали $A\Longleftrightarrow B$
+\end{answer}
+\end{remark}
+
+\begin{theorem}
+$$\exists\ f\colon\mathbb{N}\times \mathbb{N}\to \mathbb{N}$$ 
+что
+$$f(x,1)=x'$$
+$$f(x,y')=(f(x,y))'$$
+Более того, эта система уравнений имеет единственное решение.
+
+\begin{remark}
+Иными словами, теорема утверждает, что каждой паре натуральных чисел $x, y$ можно, и притом лишь единственным образом, отнести натуральное число, обозначаемое $x+y$, так, чтобы:
+$$x+1=x', \forall x\eqno(1)$$
+$$x+y'=(x+y)', \forall x,y\eqno(2)$$
+\end{remark}
+
+\begin{definition}
+Функция $f$, определённая выше, называется \textbf{операцией сложения}.
+\end{definition}
+
+\begin{remark}
+Положим по определению, что $x + y = f(x, y)$
+\end{remark}
+
+\begin{proof}
+A) Покажем сначала, что если при фиксированном $x$ можно определить $x+y\quad \forall y$: 
+$$x+1=x'\eqno(3)$$
+$$ x+y'=(x+y)', \forall y\eqno(4)$$
+то этими условиями $x+y$ определяется однозначно.
+Пусть $a_y$ и $b_y$ определены $\forall y$ и таковы, что 
+$$a_1=x'\eqno(5)$$ 
+$$b_1=x'\eqno(6)$$ 
+$$a_{y'}=(a_y)'\eqno(7)$$ 
+$$b_{y'}=(b_y)' \eqno(8)$$
+Пусть $M$ -- множество тех $y$, для которых $a_y=b_y.$ Проверим, что для множества $M$ верны условия I) и II) аксиомы 5; тогда по аксиоме 5 будет $M\supset\mathbb{N}$, и тем самым А будет доказано.
+   
+Проверим условие I). В самом деле:   
+    
+$$a_1\stackrel{(5)}{=}x'\stackrel{(6)}{=}b_1$$
+следовательно $1\in M$.
+   
+Проверим условие II). Если $y\in M$, то 
+$$a_y=b_y,$$
+следовательно по аксиоме 2, 
+$$(a_y)'=(b_y)'\eqno(9)$$
+значит 
+$$a_{y'}\stackrel{(7)}{=}(a_y)'\stackrel{(9)}{=}(b_y)'\stackrel{(8)}{=}b_{y'}$$
+и таким образом $y'\in M$. 
+    
+Поэтому по аксиоме 5 $M\supset \mathbb{N}$. Но из определения множества $M$ следует, что $M\subset\mathbb{N}$. Таким образом, $M= \mathbb{N}$, то есть $$a_y=b_y, \forall y\in\mathbb{N}.$$
+
+B) Покажем теперь, что $\forall$ фиксированного $x$ действительно возможно определить $x+y$ так, что 
+$$x+1=x'\eqno(10)$$ $$x+y'=(x+y)'\quad \forall y\eqno(11)$$
+
+Пусть $M$ -- множество тех $x$, для которых такая возможность (притом, в силу А только одна) имеется. Используя аксиому 5, докажем, что $M=\mathbb{N}$, т.е. что возможность эта имеется для всех натуральных $x$. Проверим условия I) и II) аксиомы 5.
+
+I) Проверим, что $1\in M$. В самом деле, при $x=1$ выражение $x+y$ имеет вид $1+y$. То есть, надо определить $1+y$ так, что равенства (10) и (11) будут верны при $x=1$ и всех натуральных $y$. Итак, определим $1+y$ при всех натуральных $y$ равенством
+$$1+y\stackrel{\textrm{опр}}{=}y'\eqno(12)$$
+и докажем следующие два равенства (получающиеся из (10) и (11) заменой $x$ на 1):
+$$1+1=1'\eqno(10')$$ 
+$$1+y'=(1+y)'\quad \forall y\eqno(11')$$
+
+В самом деле, равенство (10') получится, если в (12) положить $y=1$. 
+
+Докажем теперь, что равенство (11') выполняется $\forall y\in\mathbb{N}$. Сперва заметим, что (12) верно $\forall y\in\mathbb{N}$, поэтому  $\forall z\in\mathbb{N}$ верно 
+$$1+z=z'\eqno(12')$$
+
+Так как $y$ --- натуральное число, то и 
+$$z=1+y\eqno(13)$$
+тоже является натуральным числом. Таким образом, приходим к выкладке 
+$$1+y'\stackrel{(12)}{=}1+(1+y)\stackrel{(13)}{=}1+z\stackrel{(12')}{=}z'\stackrel{(13) \textrm{ Акс2}}{=}(1+y)'$$ 
+Левая часть этой цепочки равенств --- это левая часть (11'), а правая часть этой цепочки -- это правая часть (11'). Таким образом, равенсво (11') доказано. Итак, часть I) аксиомы 5 проверена.
+
+II) Пусть $x\in M$, т.е. $x+y$ определено $\forall y$ так, что верны равенства
+$$x+1=x'\eqno(10)$$ 
+$$x+y'=(x+y)'\quad \forall y\eqno(11)$$
+Нам нужно определить $x'+y$ так, чтобы были верны равенства
+$$x'+1=(x')'\eqno(10'')$$ 
+$$x'+y'=(x'+y)'\quad \forall y\eqno(11'')$$
+которые получаются из (10) и (11) заменой $x$ на $x'$ и означают, что $x'\in M$.
+
+Положим по определению
+$$x'+y\stackrel{\textrm{опр}}{=}(x+y)'\eqno(14)$$ и докажем $(10'')$ и $(11'')$.
+
+Действительно, цепочка равенств  $$x'+1\stackrel{(14)}{=}(x+1)'\stackrel{(10), \textrm{ Акс2}}=(x')'$$ доказывает равенство $(10'')$, а цепочка равенств $$x'+y'\stackrel{(14)}{=}(x+y')'\stackrel{(11), \textrm{ Акс2}}{=}((x+y)')'\stackrel{(14)}{=}(x'+y)'$$
+доказывает равенство $(11'').$  Следовательно и $x'\in M$ поэтому по аксиоме 5 $M=\mathbb{N}$ и пункт В) теоремы 4, а вместе с ним и вся теорема 4, доказаны.
+\end{proof}
+\end{theorem}
+    
+\begin{theorem}{(Закон ассоциативности сложения)}\label{th:ass+} 
+$$(x+y)+z=x+(y+z)$$
+\begin{proof}
+Пусть $x, y$ фиксированы, и $M$  -- множество тех $z$, для которых верно утверждение теоремы.
+
+I) Проверим для $1$, $(x+y)+1\stackrel{(1)}{=}(x+y)'\stackrel{(2)}{=}x+y'\stackrel{(1)}{=}x+(y+1)$,
+следовательно, $1\in M.$
+
+II) Проверим $\forall z$. Пусть $z\in M$. Тогда $$(x+y)+z=x+(y+z),\eqno(15)$$ следовательно 
+$$(x+y)+z'\stackrel{(2)}{=}((x+y)+z)'\stackrel{(15),\ \textrm{Акс 2}}{=}(x+(y+z))'\stackrel{(2)}{=}x+(y+z)'\stackrel{(2)}{=}x+(y+z')$$
+так что и $z' \in M$. Тем самым утверждение теоремы справедливо $\forall z.$
+\end{proof}
+\end{theorem}
+
+\begin{theorem}{(Закон коммутативности сложения)}
+$$ x + y = y + x $$
+\begin{proof}
+Пусть $y\in\mathbb{N}$ фиксированное. Возьмём множество $M = \{x|\  x+y = y+x,\ x\in\mathbb{N}$. Докажем, что $M=  \mathbb{N}$, для чего воспользуемся аксиомой индукции.
+I) $y + 1 = y'$ по (1)\\
+Но по построению из доказательства теоремы \ref{th:ass+} имеем: $1 + y = y'$ по (12)
+$$y + 1 = 1 + y \Longrightarrow 1\in M$$
+
+II)Пусть $x\in M$, тогда для него верно
+$$x+y = y+x $$
+$$(x + y)' \stackrel{\textrm{Акс 2}}{=} (y+x)' \stackrel{(2)}{=} y + x'$$
+
+$$ x' + y \stackrel{(14)}{=} (x + y)' \Longrightarrow x' + y = y + x' \Longrightarrow x'\in M$$
+
+Итак (по аксиоме 5) $M \ \mathbb{N}$
+\end{proof}
+\end{theorem}
+
+\begin{theorem}(9)
+Если $x\in \mathbb{N},\quad y\in\mathbb{N}$, то верно ровно одно из условий:
+\begin{enumerate}
+    \item $x = y$
+    \item $\exists ! u\in\mathbb{N}|\quad x = y + u$ \begin{definition}
+    В этом случае говорят, что $x > y$
+    \end{definition}
+    \item $\exists ! v\in\mathbb{N}|\quad y = x + v$
+    \begin{definition}
+    В этом случае говорят, что $x < y$
+    \end{definition}
+\end{enumerate}
+\begin{proof}
+Без доказательства!
+\end{proof}
+\end{theorem}
+
+\begin{remark}
+$<,\ >$ --- отношения строгого порядка на $\mathbb{N}$. $(<)^{-1} = >$
+
+Положим $x \leqslant y \stackrel{def}{\Longleftrightarrow} (x = y)\vee(x < y)$. Тогда $\leqslant$ --- отношение порядка на $\mathbb{N}$.
+Положим $\geqslant = (\leqslant)^{-1}$
+\end{remark}
+
+\begin{definition}
+Порядок $\leqslant$ называется \textbf{естественным порядком в $\mathbb{N}$}
+\end{definition}
+
+\begin{theorem}(27)
+Если $A\subset \mathbb{N},\ A\neq\varnothing$, то $\exists a_*\in A$, такое что $\forall a\in A$ верно $a_* \leqslant a$. То есть в каждом непустом множестве натуральных чисел есть наименьший элемент. То есть множество $\mathbb{N}$ --- вполне упорядоченно. 
+\begin{proof}
+Положим $M = \{x\in\mathbb{N}|\ \forall a\in A \textrm{ верно } x\leqslant a\}$.
+Ранее Ландау доказал, что $\forall x\in \mathbb{N}: 1 \leqslant x$, поэтому $1\in M$. Кроме того $M \neq \mathbb{N}$. В самом деле: $A\neq \varnothing \Longrightarrow \exists a\in A \stackrel{\textrm{Ландау доказал}}{\Longrightarrow} a < a + 1 \stackrel{def M}{\Longrightarrow} (a+1)\notin M$.
+
+Если бы для $\forall m\in \mathbb{N}$ из $m\in M$ следовало ба $(m+1)\in M$, то (уже доказали, что $1\in M$ по аксиоме 5) было бы $M = \mathbb{N}$. Но это неверно, так как доказали, что $M\neq\mathbb{N}$.
+
+Поэтому существует такой $m\in M$, что $(m+1)\notin M$. Тогда:\\
+1) $\forall a\in A$ верно $m\leqslant a$ (по определению $M$ и тому, что $m\in M$;\\
+2) $m\in A$.
+
+Докажем 2) от противного. Если $m\notin A$, то $\notexists a\in A$, что $m = a$, то есть $m\neq a\ \forall a\in A$. Имеем:
+$
+\begin{cases}
+m \leqslant a\\
+m\neq a
+\end{cases}\stackrel{def \leqslant,<}{\Longrightarrow} m < a\ \forall a\in A$
+Ландау доказал, что из $m < a$ следует $m+1 \leqslant a$. Но $m+1\leqslant a\ \forall a\in A$ означает, что $m\in M$, что неверно. 2) доказано. $m$ --- наименьший элемент в $A$, положим $a_- = m$
+\end{proof}
+\end{theorem}
+
+\begin{remark}
+Заметим, что из того, что в множестве $\mathbb{N}$ существует наименьший элемент не следует, что $\mathbb{N}$ вполне упорядоченно.
+\end{remark}
+
+\textit{Домашнее задание: 
+\begin{enumerate}
+    \item разобрать самостоятельно умножение по Ландау;
+    \item Доказать (со ссылками на Ландау):
+    \begin{itemize}
+        \item $1\cdot(1+ 1) = 1 + 1$
+        \item $(1+1)\cdot(1+1) = 1+1+1+1$
+        \item $(x+y)\cdot z = xz + yz$
+    \end{itemize}
+\end{enumerate}}
+
+Осталось обсудить целые, рациональные, действительные, p--адические числа. Сделаем это позднее.
+
+\section{Булевые функции}
+$B=\{0,\ 1\}$ --- множество возможных значений булевой функции. $\forall n\in\mathbb{N}$ определим $B^n = \underbrace{B\times B \times\dots\times B}_{n}$ --- n--мерный булев куб--область определения булевой функции от n переменных.
+
+Малыми латинскими буквами $a,\ b,\ c,\dots p,\ q,\dots$ будем обозначать булевы переменные.
+
+Булевые константы $0=\textrm{ложь, }\ 1=\textrm{истина}$ можно вычислить как булевы функции от $0$ переменных.
+
+\textbf{Вопрос:}
+Сколько существует булевых функций от $1$ переменных?
+
+\begin{tabular}{c|cccc}
+        & $f_1(p)$ & $f_2(p)$ & $f_3(p)$ & $f_4(p)$  \\
+       $p$ & $0$ & $\overline{p}$ & $p$ & $1$ \\
+       $0$ & $0$ & $1$ & $0$ & $1$ \\
+       $1$ & $0$ & $0$ & $1$ & $1$
+\end{tabular}
+
+Имеем 4 функции:\\
+$f_1(p) = 0$ --- константа 0;\\
+$f_2(p) = \overline{p}$ --- отрицание;\\
+$f_3(p) = p$ --- тождественная функция;\\
+$f_4(p) = 1$ --- константа 1.
+
+
+
+\begin{definition}
+Переменная $x_j$ называется для булевой функции $f$ \textbf{фиктивной}, если $\forall i = 1,\ 2,\dots j-1,\ j+1,\dots n$, где $x_i\in\{0,\ 1\}$ верно 
+$$f(x_1,\ x_2,\dots, x_{j-1},\ 0,\ x_{j+1},\dots x_n) = f(x_1,\ x_2,\dots, x_{j-1},\ 1,\ x_{j+1},\dots x_n) $$
+\end{definition}
+
+$f$ --- функция  от n булевых переменных, но переменная $x_j$ --- фиктивная для $f$, то есть $f$ от $x_j$ по существу не зависит.
+
+\begin{exmp}
+ $f(x,\ y) = x+y-y$, $y$ --- фиктивная переменная.
+\end{exmp}
+
+\subsection{Выбрасывание фиктивной переменной}
+
+$f_1(0) = f_1(1)$ --- по таблице значений для $f_1$, поэтому переменная $p$ в $f_1(p)$ фиктивная и $f_1$ не зависит ни от одной переменной.
+
+\begin{definition}
+Уменьшение числа аргументов функции за счёт отбрасывания фиктивных переменных называется \textbf{редукцией булевой функции}.
+
+Если отбрасывание произведено столько раз, что фиктивных переменных не осталось, то говорят, что функция была подвергнута \textbf{полной редукции}.
+\end{definition}
+
+\begin{exmp}
+ Добавление функции переменной.
+ 
+ Пусть дана булевая функция от 1 переменного $p$:\\
+ 
+ \begin{tabular}{c|c}
+      $p$ & $f(p)$ \\\hline
+      0 & a \\
+      1 & b
+ \end{tabular}\\
+ 
+ Добавим фиктивную переменную $q$, получим функцию двух переменных:\\
+ 
+ \begin{tabular}{c|c|с}
+      $p$ & $q$ & $f(p,q)$ \\\hline
+      0 & 0 & a \\
+      0 & 1 & a \\ 
+      1 & 0 & b \\
+      1 & 1 & b
+\end{tabular}
+\end{exmp}
+
+\begin{definition}
+Переменная, не являющаяся для функции фиктивной называется \textbf{существенной} для этой функции.
+\end{definition}
+
+\begin{remark}
+Получим, что если у функции $k$ существенных переменных, то можно представить её $(\forall n>k)$ как функцию от $n$ переменных. При полной редукции любой из этих получим исходную функцию от $k$ переменных.
+\end{remark}
+
+Сколько существует булевых функций от двух переменных?
+\begin{answer}{}
+Перечислим их все и дадим им названия.
+
+\begin{tabular}{cc|ccccccccc}
+     $x$ & $y$ & $f_1(x,y)$ & $f_2$ & $f_3$ & $f_4$ & $f_5$ & $f_6$ & $f_7$  \\
+     $0$ & $0$ & $0$ & $1$ & $0$ & $1$ & $0$ & $1$ & $0$ \\
+     $0$ & $1$ & $0$ & $0$ & $1$ & $1$ & $0$ & $0$ & $1$ \\
+     $1$ & $0$ & $0$ & $0$ & $0$ & $0$ & $1$ & $1$ & $1$ \\
+     $1$ & $1$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ & $0$ \\\hline
+& & const 0 & $\overline{x\vee y} = x\downarrow y$ & $\overline{x} \wedge y$ & $\overline{x}$ & $\overline{x\rightarrow y}$ & $\overline{y}$ & $x\oplus y$ \\
+& & & стрелка Пирса & $x < y$ &  & $x > y$ & & слож. по мод 2&  &
+\end{tabular}
+
+\begin{tabular}{cc|ccccccccc}
+     $x$ & $y$ & $f_8$ & $f_9$ & $f_{10}$ & $f_{11}$ & $f_{12}$ & $f_{13}$ & $f_{14}$ & $f_{15}$ & $f_{16}$ \\
+     $0$ & $0$ & $1$ & $0$ & $1$ & $0$ & $1$ & $0$ & $1$ & $0$ & $1$ \\
+     $0$ & $1$ & $1$ & $0$ &  $0$ & $1$ & $1$ & $0$ & $0$ & $1$ & $1$ \\
+     $1$ & $0$ & $1$ & $0$ & $0$ & $0$ & $0$ & $1$ & $1$ & $1$ & $1$ \\
+     $1$ & $1$ & $0$ & $1$ & $1$ & $1$ & $1$ & $1$ & $1$ & $1$ & $1$ \\\hline
+&&  $\overline{x\wedge y} = x|y$ & $x\wedge y$ & $x\leftrightarrow y$ & $y$ & $x\rightarrow y$ & $x$ & $y\rightarrow x$ & $x\vee y$ & const 1  \\
+&&  штрих Шеффера &  &  &&  &  &  &  &  \\
+
+\end{tabular}
+
+\end{answer}
+
+\subsection{Классы булевых функций (классы Поста)}
+
+$T_0$ Сохраняющие 0. $f\in T_0 \Longleftrightarrow f(0,\dots 0) = 0$;
+
+$T_1$ Сохраняющие 1. $f\in T_1 \Longleftrightarrow f(1,\dots 1) = 1$;
+
+$S$ Самодейственные. $f\in S \Longleftrightarrow \forall x_1,\dots x_n\quad f(x_1,\dots x_n) = \overline{f(\overline{x_1},\dots \overline{x_n})}$;
+
+$M$ Монотонные. $f\in M \Longleftrightarrow (x_1,\dots x_n) > (y_1,\dots y_n) \Longrightarrow f(x_1,\dots x_n) > f(y_1,\dots y_n)$;
+
+Функция также может не принадлежать ни одному классу.\\
+Порядок в $B$ задан так: $0<1$.\\
+Порядок в $B^n$ задан так: $(x_1,\dots x_n) > (y_1,\dots y_n) \Longleftrightarrow \begin{cases}
+\forall j = 1\\ %--------------??????????????????????---------------------
+x_j \geqslant y_j
+\end{cases}$
+
+$L$ Линейные. $f\in L \Longleftrightarrow \textrm{полином Жегалкина ф-ии} f \textrm{ линеен}$
+\begin{definition}
+\textbf{Полином Жегалкина} --- это сумма по модулю 2 мономов Жегалкина.
+\end{definition}
+
+\begin{definition}
+\textbf{Моном Жегалкина} от трёх переменных $x,\ y,\ z$\\
+степени $0$: $0,\ 1$;\\
+степени $1$: $x,\ y,\ z$;\\
+степени $2$: $xy,\ xz,\ yz$;
+степени $3$: $xyz$;
+степени $\geqslant 4$: не существует;
+сложение: $\oplus$; умножение: $\wedge$
+\end{definition}
+
+Почему только эти? Казалось бы, многочлен $x^2 = x\wedge x$  тоже имеет степень 2! Но на самом деле он имеет степень 1, так как $x\wedge x = x$.
+
+\begin{exmp}
+Многочлены Жегалкина.
+
+$0,\ 1,\ x,\ y,\ z,\ x\oplus 1,\ y\oplus 1,\ z\oplus 1,\ xy,\ xy\oplus 1,\ xz,\ xz\oplus 1,\ yz,\ yz\oplus 1,\ xy\oplus x, xy\oplus x\oplus 1,\ xy\oplus y,\ xy\oplus y\oplus 1,\ xy\oplus z, xy\oplus z\oplus 1,\dots$
+\end{exmp}
+
+Выпишем все многочлены Жегалкина от двух переменных $x,\ y$:\\
+$$0,\ 1,\ x,\ y,\ x\oplus 1,\ y\oplus 1,\ xy,\ xy\oplus 1,\ xy\oplus x,\ xy\oplus y,\ xy\oplus x\oplus 1,\ xy\oplus y\oplus 1,\ xy\oplus x\oplus y, xy\oplus x\oplus y\oplus 1, x\oplus y, x\oplus y\oplus 1$$
+16 Штук
+
+\begin{theorem}
+Любая булевая функция однозначно представляется в виде многочлена Жегалкина, то есть если $f\colon B^n \longrightarrow B$, то $\exists a_0,\ a_1,\dots a_n,\ a_{12},\ a_{13},\dots a_{1n},\dots a_{21},\dots a_{2n},\dots a_{123}, a_{124},\dots a_{12n},\dots a_{1234\dots n}$ что $\forall x_1,\ x_2\dots x_n \in B$ верно $f(x_1,\dots x_n) = a_0\oplus a_1x_1\oplus a_2x_2\oplus \dots \oplus a_nx_n\oplus a_{12}x_1x_2\oplus a_{13}x_1x_3\oplus\dots\oplus a_{1n}x_1x_n\oplus a_{23}x_2x_3\oplus a_{24}x_2x_4\oplus \dots\oplus a_{1234\dots n}x_1x_2x_3x_4\dots x_n$
+\end{theorem}
+
+Коэффициенты $a$ можно находить методом неопределённых коэффициентов.
+
+Многочлены, отличающиеся лишь порядком переменных считаем одинаковыми. $(x_1x_2 = x_2x_1)$
+
+Полиномы, отличающиеся лишь мономов считаем одинаковыми.
+
+$f\in L \Longleftrightarrow$ многочлен Жегалкина для функции $f$ линеен $\Longleftrightarrow$ многочлен Жегалкина для $f$ имеет степень не выше 1, то есть 0 или 1.
+
+\begin{definition}
+Говорят, что функция $f$ получена путём подстановки функции $g$ в функцию $h$, если $\forall x_j\in B\quad f(x_1,\dots x_n) = h(x_1,\dots g(x_1, x_2,\dots x_k),\dots x_n)$ при этом подставить $g$ можно на место любой переменной $x_j$. Каждая из $f,\ g,\ h$ может быть от любого количества переменных.
+\end{definition}
+
+\begin{definition}
+Говорят, что $f$ получена из $g$ путём отождествления переменных $x_1,\ x_2,\ x_3$ функции $g$ если $f(x,\ y,\ z) = g(x,\ x,\ x,\ y,\ z)$
+\end{definition}
+
+Отождествлять можно $\forall$ кол--во переменных на любых местах (то есть вместо $\forall$ переменных функции $g$ подставены переменные от которых зависит $f$)
+
+\begin{exmp}A\\
+$f(x, y) = x\wedge y$;\\
+$g(x,y,z) = x\vee y\vee z$;
+
+Тогда $f(a,b,c) = a\wedge (a\vee b\vee c) = h(a, g(a, b, c))$ подставили $g$ в $h$, получили $f$.
+\end{exmp}
+
+\begin{exmp}B
+$g(x_1, x_2, x_3, x_4) = (x_1\wedge x_2) \longrightarrow (x_3\vee x_4)$ отождествим в $g$ переменные $x_2,\ x_3,\ x_4$. Получим $A(a, b) = g(a, b, b, b) = (a\wedge b) \longrightarrow (b\vee b)$.
+\end{exmp}
+
+Основной вопрос теории полноты систем булевых функций: Найти свойства набора булевых функций (конечного или бесконечного набора) $F$, что любую булевую функцию от любого числа переменных можно выразить через функции из набора $F$, используя слудующие операции:\\
+--- подстановка;
+--- отождествление переменных;
+
+\textbf{Приложение этой теории:}\\
+Из какого набора элементов можно собрать любую логическую схему (сумматор, и тому подобное)
+$0+0=0\quad 1+0=0+1=1\quad 1+1=10$
+
+
+
+
+
+
+
+
+
+
+ \end{document}
